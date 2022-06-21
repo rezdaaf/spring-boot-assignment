@@ -26,7 +26,7 @@ public class MovieHallController {
             if (name == null) {
                 movieHalls.addAll(movieHallRepository.findAll());
             } else {
-                movieHalls.addAll(movieHallRepository.findByNameIgnoreCase(name));
+                movieHalls.addAll(movieHallRepository.findByNameIgnoreCaseContaining(name));
             }
             return new ResponseEntity<>(movieHalls, HttpStatus.OK);
         } catch (Exception e) {
