@@ -90,4 +90,14 @@ public class SeatController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/seat/detail")
+    public ResponseEntity<Seat> getSeatByRowNumberHallId(@RequestParam(required = true) Integer row, @RequestParam(required = true) Integer number,  @RequestParam(required = true) String hallId) {
+        List<Seat> seat = seatRepository.findByRowAndNumberAndHallId(row, number, hallId);
+        if (!seat.isEmpty()) {
+            return new ResponseEntity<>(seat.get(0), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
